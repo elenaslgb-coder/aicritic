@@ -6,6 +6,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(express.static('public'));
 
 const client = new OpenAI({
   apiKey: process.env.LLM_API_KEY,
@@ -60,10 +61,6 @@ app.post('/api/analyze', async (req, res) => {
       error: 'Не удалось получить разбор. Попробуйте ещё раз.',
     });
   }
-});
-
-app.get('/', (req, res) => {
-  res.send('AI-критик работает. Эндпоинт: POST /api/analyze');
 });
 
 const PORT = process.env.PORT || 3000;
